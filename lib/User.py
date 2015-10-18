@@ -3,7 +3,7 @@
 #   Adam Perron (10106523)
 #   Enoch Tam (10094398)
 
-from model.Transaction import Transaction
+from lib.Transaction import Transaction
 
 class User:
 

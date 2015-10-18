@@ -4,11 +4,11 @@
 #   Enoch Tam (10094398)
 
 
-from model.Event import Event
-from model.CurrentEvents import CurrentEvents
-from model.Transaction import Transaction
-from model.DailyTransactions import DailyTransactions
-from model.User import User
+from lib.Event import Event
+from lib.CurrentEvents import CurrentEvents
+from lib.Transaction import Transaction
+from lib.DailyTransactions import DailyTransactions
+from lib.User import User
 
 programloop = True
 
