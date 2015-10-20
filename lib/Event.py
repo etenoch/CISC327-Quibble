@@ -1,7 +1,9 @@
 # CISC327 Quibble
-# Team Apus
+#   Team Apus
 #   Adam Perron (10106523)
 #   Enoch Tam (10094398)
+
+# The event class assigns attributes to the event object.
 
 
 class Event:
