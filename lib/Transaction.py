@@ -13,8 +13,13 @@ class Transaction:
     DELETE = 5
     END = 0
 
-    def __init__(self, eventName, transactionType, date=0, numTickets=0):
+    def __init__(self, eventName, transactionType, date="", numTickets=0):
         self.eventName = eventName
         self.date = date
         self.transactionType = transactionType
         self.numTickets = numTickets
+
+    def validDate(date):
+        return True
+    validDate = staticmethod(validDate)
+

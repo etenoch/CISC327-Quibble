@@ -19,9 +19,9 @@ class CurrentEvents:
     def addEvent(self,event):
         self.events[event.eventName] = event
 
-    def removeEvent(self,event):
-        if event.eventName in self.events:
-            del self.events[event.eventName]
+    def removeEvent(self,eventName):
+        if eventName in self.events:
+            del self.events[eventName]
 
     def fromFile(self,filename):
         with open(filename) as input_file:

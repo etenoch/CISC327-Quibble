@@ -10,22 +10,22 @@ from lib.Transaction import Transaction
 from lib.DailyTransactions import DailyTransactions
 from lib.User import User
 
-## initialize program ##
+# initialize program #
 programloop = True
 
 currentEvents = CurrentEvents()
-currentEvents.fromFile("filepath")  # readin current events
+currentEvents.fromFile("currentEvents.txt")  # readin current events
 
 dailyTransactions = DailyTransactions()
 
 user = None
 
 
-## Main Program Loop ##
+# Main Program Loop #
 while programloop:
     command = raw_input().strip()
 
-    if user is None:  ## User hasn't logged in yet
+    if user is None:  # User hasn't logged in yet
         if command == "login":
             command = raw_input().strip()
             if command == "sales":
@@ -42,32 +42,73 @@ while programloop:
             break
         elif command == "sell":
             if user.validCommand(Transaction.SELL):
-                eventName = raw_input()
+                eventName = raw_input("Enter event name: ")
+                if eventName.strip() in currentEvents.events: # event name valid
+                    numTickets = raw_input("Enter num tickets: ")
+                    if (not user.admin and numTickets <= 8) or ( numTickets <= currentEvents.getEvent(eventName).numTickets): # numtickets valid
+                        dailyTransactions.addTransaction(Transaction(eventName, Transaction.SELL))  # sell ticket
+                    else:
+                        print "Error: Num tickets is invalid"
+                else:
+                    print "Error: Event name entered is invalid"
             else:
                 print "throw error"  # permissions error
         elif command == "return":
             if user.validCommand(Transaction.RETURN):
-                print "do stuff"
+                eventName = raw_input("Enter event name: ")
+                if eventName.strip() in currentEvents.events: # event name valid
+                    numTickets = raw_input("Enter num tickets: ")
+                    if (not user.admin and numTickets <= 8) or (numTickets <= currentEvents.getEvent(eventName).numTickets): # numtickets valid
+                        dailyTransactions.addTransaction(Transaction(eventName, Transaction.RETURN))  # Return ticket
+                    else:
+                        print "Error: Num tickets is invalid"
+                else:
+                    print "Error: Event name entered is invalid"
             else:
-                print "throw error"  # permissions error
+                    print "throw error"  # permissions error
         elif command == "create":
             if user.validCommand(Transaction.CREATE):
-                print "do stuff"
+                eventName = raw_input("Enter event name: ")
+                if not eventName.strip() in currentEvents.events and len(eventName)<=20: # event name valid
+                    date = raw_input("Enter date (YYMMDD): ")
+                    if Transaction.validDate(date): # date is valid
+                        numTickets = raw_input("Enter num tickets: ")
+                        if numTickets <= 99999:
+                            dailyTransactions.addTransaction(Transaction(eventName, Transaction.CREATE,date,numTickets))  # create ticket
+                        else:
+                            print "Error: Number cannot be greater than 99999"
+                    else:
+                        print "Error: Input is invalid"
+                else:
+                    print "Error: Event name entered is invalid"
             else:
-                print "throw error"  # permissions error
+                    print "throw error"  # permissions error
         elif command == "add":
             if user.validCommand(Transaction.ADD):
-                print "do stuff"
+                eventName = raw_input("Enter event name: ")
+                if eventName.strip() in currentEvents.events: # event name valid
+                    numTickets = raw_input("Enter num tickets: ")
+                    if numTickets <= 99999:
+                        dailyTransactions.addTransaction(Transaction(eventName, Transaction.ADD))  # add ticket
+                    else:
+                        print "Error: Number cannot be greater than 99999"
+                else:
+                    print "Error: Event name entered is invalid"
             else:
-                print "throw error"  # permissions error
+                    print "throw error"  # permissions error
         elif command == "delete":
             if user.validCommand(Transaction.DELETE):
-                print "do stuff"
+                eventName = raw_input("Enter event name: ")
+                if eventName.strip() in currentEvents.events: # event name valid
+                    dailyTransactions.addTransaction(Transaction(eventName, Transaction.DELETE))  # delete ticket
+                    currentEvents.removeEvent(eventName)
+                else:
+                    print "Error: Event name entered is invalid"
             else:
                 print "throw error"  # permissions error
         else:
             print "throw error"  # invalid command
 
 
-## Write transactions to file ##
-dailyTransactions.toFile("filepath")  # write output file
+# Write transactions to file #
+dailyTransactions.toFile("transactions.txt")  # write output file
