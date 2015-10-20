@@ -13,7 +13,12 @@ class DailyTransactions:
         self.transactions.append(transaction)
 
     def toFile(self,filename):
-        print "stub"
+        file = open(filename,"w")
+        for t in self.transactions:
+            date = 0 if t.date=="" else int(t.date)
+            line = "%02d %s %06d %05d" % (t.transactionType, t.eventName.ljust(20),date,t.numTickets)
+            file.write(line)
+        print ""
 
 
 
