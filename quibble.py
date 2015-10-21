@@ -41,9 +41,9 @@ while programloop:
                 elif command == "admin":
                     user = User(True)
                 else:
-                    raise QuibbleError("an error occured") # Only sales or admin allowed
+                    raise QuibbleError("Error: an error occured") # Only sales or admin allowed
             else:
-                raise QuibbleError("an error occured") # Only login command allowed
+                raise QuibbleError("Error: an error occured") # Only login command allowed
         else:
             if command == "logout":
                 programloop=False
