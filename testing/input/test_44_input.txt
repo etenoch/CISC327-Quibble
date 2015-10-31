@@ -1,0 +1,6 @@
+login
+admin
+create
+Valid Name
+[current date YYMMDD]
+logout

@@ -1,0 +1,6 @@
+login
+admin
+sell
+Valid Name
+350
+logout

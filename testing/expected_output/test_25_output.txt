@@ -1,0 +1,2 @@
+Enter event name:
+Error: Number cannot be a decimal

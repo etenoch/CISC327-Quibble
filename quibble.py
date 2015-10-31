@@ -3,22 +3,20 @@
 #   Adam Perron (10106523)
 #   Enoch Tam (10094398)
 
-
-# Helper Object Classes #
-
-from lib.Event import Event
 from lib.QuibbleError import QuibbleError
 from lib.CurrentEvents import CurrentEvents
 from lib.Transaction import Transaction
 from lib.DailyTransactions import DailyTransactions
 from lib.User import User
 
-# Initialize Program #
+import sys
 
+# Initialize Program #
+cmd_arguments = sys.argv
 programloop = True
 
 currentEvents = CurrentEvents()
-currentEvents.fromFile("test_currentEventsFile.txt") # Read in current events
+currentEvents.fromFile(cmd_arguments[1])  # Read in current events
 
 dailyTransactions = DailyTransactions()
 
@@ -135,4 +133,4 @@ while programloop:
 
 # Write transactions to file #
 
-dailyTransactions.toFile("transactions.txt")  # write output file
+dailyTransactions.toFile(cmd_arguments[2])  # write output file

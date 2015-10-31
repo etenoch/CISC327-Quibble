@@ -18,6 +18,6 @@ class DailyTransactions:
         file = open(filename,"w")
         for t in self.transactions:
             date = 0 if t.date=="" else int(t.date)
-            line = "%02d %s %06d %05d" % (t.transactionType, t.eventName.ljust(20),date,t.numTickets)
+            line = "%02d %s %06d %05d\n" % (t.transactionType, t.eventName.ljust(20),date,t.numTickets)
             file.write(line)
         file.write("00                      000000 00000")

@@ -1,0 +1,7 @@
+login
+admin
+create
+Valid New Name
+151208
+750
+logout

@@ -1,0 +1,6 @@
+login
+admin
+return
+Valid Name
+36
+logout

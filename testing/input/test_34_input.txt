@@ -1,0 +1,6 @@
+login
+sales
+sell
+Valid Name
+Pizza
+logout

@@ -1,0 +1,3 @@
+Enter event name:
+Enter date (YYMMDD):
+Error: No input entered

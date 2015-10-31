@@ -1,0 +1,7 @@
+login
+admin
+delete
+Valid Name
+sell
+Valid Name
+logout

@@ -1,0 +1,2 @@
+Enter event name:
+Error: No input entered.

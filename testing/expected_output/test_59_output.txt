@@ -1,0 +1,5 @@
+Enter event name:
+Enter num tickets:
+Enter event name:
+Enter num tickets:
+Error: Cannot complete action in the same session

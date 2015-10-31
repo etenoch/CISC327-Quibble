@@ -1,0 +1,9 @@
+login
+admin
+create
+Valid Name
+151216
+100
+sell
+Valid Name
+logout
