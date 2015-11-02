@@ -44,11 +44,11 @@ while programloop:
                 elif not command:
                     raise QuibbleError("Error: No input entered")
                 else:
-                    raise QuibbleError("Error: Input is Invalid 1")  # Only sales or admin allowed
+                    raise QuibbleError("Error: Input is Invalid")  # Only sales or admin allowed
             elif not command:
                 raise QuibbleError("Error: No input entered")
             else:
-                raise QuibbleError("Error: Input is Invalid2")  # Only login command allowed
+                raise QuibbleError("Error: Input is Invalid")  # Only login command allowed
         else:
             if command == "logout":
                 programloop = False
@@ -133,11 +133,11 @@ while programloop:
                 raise QuibbleError("Error: Input is invalid")  # Invalid command
 
     except EOFError as e:
-        print "Error: Input is invalid eof"
+        print "Error: Input is invalid"
         programloop = False  # quit program
         break
     except ValueError as e:  # cannot parse as int
-        print "Error: Input is invalid val error"
+        print "Error: Input is invalid val"
         programloop = False
         break
     except QuibbleError as e:  # catch program error
