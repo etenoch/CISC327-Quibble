@@ -1,4 +1,4 @@
 Enter event name:
 Enter date (YYMMDD):
 Enter num tickets:
-Error: Number cannot be greater than 99999
+Error: Number is invalid

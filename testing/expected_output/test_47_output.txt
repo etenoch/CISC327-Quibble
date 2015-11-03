@@ -1,4 +1,4 @@
 Enter event name:
 Enter date (YYMMDD):
 Enter num tickets:
-Error: Number cannot be negative
+Error: Number is invalid

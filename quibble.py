@@ -103,10 +103,10 @@ while programloop:
                             raise QuibbleError("Error: No input entered")
                         if Transaction.validDate(date):  # date is valid
                             numTickets = int(raw_input("Enter num tickets: \n"))  # Enter number of tickets
-                            if numTickets <= 99999:
+                            if numTickets <= 99999 and numTickets > 0:
                                 dailyTransactions.addTransaction(Transaction(eventName, Transaction.CREATE,numTickets,date))  # create ticket
                             else:
-                                raise QuibbleError("Error: Number cannot be greater than 99999")
+                                raise QuibbleError("Error: Number is invalid")
                         else:
                             raise QuibbleError("Error: Input is invalid")
                     else:
