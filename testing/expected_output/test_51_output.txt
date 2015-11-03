@@ -2,4 +2,4 @@ Enter event name:
 Enter date (YYMMDD):
 Enter num tickets:
 Enter event name:
-Error: Cannot complete action in the same session
+Error: Event name entered is invalid

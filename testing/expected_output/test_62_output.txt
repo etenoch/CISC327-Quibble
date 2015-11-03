@@ -1,2 +1,3 @@
 Enter event name:
-Error: Cannot complete action in the same session
+Enter event name:
+Error: Event name entered is invalid
