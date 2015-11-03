@@ -32,6 +32,8 @@ while programloop:
         command = raw_input().strip()
 
         if user is None:  # User hasn't logged in yet
+            if command == "logout":
+                raise QuibbleError("Error: You are not logged in")
             if command == "login":
                 command = raw_input().strip()
                 if command == "sales":
@@ -82,7 +84,8 @@ while programloop:
                     eventName = raw_input("Enter event name: \n")
                     if eventName.strip() in currentEvents.events: # Event name valid
                         numTickets = int(raw_input("Enter num tickets: \n")) # Enter number of tickets
-                        if (numTickets>=1) and ((not user.admin and numTickets <= 8) or (user.admin and numTickets <= currentEvents.getEvent(eventName).numTickets)):  # numtickets valid
+                        theNumTickets = currentEvents.getEvent(eventName).numTickets if currentEvents.getEvent(eventName) else 0
+                        if (numTickets >= 1) and ((not user.admin and numTickets <= 8) or (user.admin and numTickets <= 99999 - theNumTickets)):  # numtickets valid
                             dailyTransactions.addTransaction(Transaction(eventName, Transaction.RETURN,numTickets))  # Return ticket
                         else:
                             raise QuibbleError("Error: Num tickets is invalid")
@@ -123,7 +126,7 @@ while programloop:
                         if numTickets>=1 and numTickets <= 99999:
                             dailyTransactions.addTransaction(Transaction(eventName, Transaction.ADD,numTickets))  # Add ticket
                         else:
-                            raise QuibbleError("Error: Number cannot be greater than 99999")  # Invalid number of tickets
+                            raise QuibbleError("Error: Number is invalid")  # Invalid number of tickets
                     else:
                         raise QuibbleError("Error: Event name entered is invalid")  # Invalid event name
                 else:

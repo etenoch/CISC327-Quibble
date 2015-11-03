@@ -13,10 +13,7 @@ class CurrentEvents:
         self.events = {}
 
     def getEvent(self,eventName):
-        if eventName in self.events:
-            return self.events[eventName]
-        else:
-            return False
+        return self.events[eventName.strip()]
 
     def addEvent(self,event):
         self.events[event.eventName] = event

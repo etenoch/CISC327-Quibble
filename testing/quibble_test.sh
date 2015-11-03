@@ -1,12 +1,8 @@
 #!/bin/bash
-# chdir input
-# for i in *.txt
-# do
-#     echo "running test $i"
-#     python ../quibble.py curevents.txt ../outputs/$i.txt < $i.txt > ../outputs/$i.log
-# done
 
-rm outputs/*
+rm -f outputs/*
+rmdir outputs
+mkdir outputs
 
 COUNTER=1
 while [  $COUNTER -lt 81 ]; do  # loop through 80 test cases
@@ -36,3 +32,4 @@ while [  $COUNTER -lt 81 ]; do  # validate 80 tests
 
     let COUNTER=COUNTER+1
 done
+
