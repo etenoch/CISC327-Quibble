@@ -22,12 +22,12 @@ while [  $COUNTER -lt 81 ]; do  # validate 80 tests
     echo "" >> test_results.txt
     echo "==== Test Case $COUNTER ====" >> test_results.txt
 
-    if diff --ignore-all-space --ignore-case outputs/test_"$COUNTER"_actual_output_file.txt expected_output_files/test_"$COUNTER"_output_file.txt >> test_results.txt ;
+    if diff -u --ignore-all-space --ignore-case outputs/test_"$COUNTER"_actual_output_file.txt expected_output_files/test_"$COUNTER"_output_file.txt >> test_results.txt ;
     then
         echo "Output File Test Passed" >> test_results.txt
     fi
 
-    if diff --ignore-all-space --ignore-case outputs/test_"$COUNTER"_actual_output.txt expected_output/test_"$COUNTER"_output.txt >> test_results.txt ;
+    if diff -u --ignore-all-space --ignore-case outputs/test_"$COUNTER"_actual_output.txt expected_output/test_"$COUNTER"_output.txt >> test_results.txt ;
     then
         echo "Output Test Passed" >> test_results.txt
     fi

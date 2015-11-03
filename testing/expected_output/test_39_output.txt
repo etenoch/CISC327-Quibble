@@ -1,2 +1,2 @@
 Enter event name:
-Error: Event title is greater than 20 characters
+Error: Event name entered is invalid

@@ -1,2 +1,2 @@
 Enter event name:
-Error: Input invalid
+Error: Input is invalid

@@ -1,2 +1,3 @@
 Enter event name:
-Error: Number cannot be a decimal
+Enter num tickets:
+Error: Input is invalid
