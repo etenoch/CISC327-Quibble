@@ -1,0 +1,5 @@
+Enter event name: 
+Enter date (YYMMDD): 
+Enter num tickets: 
+Enter event name: 
+Error: Event name entered is invalid

@@ -1,0 +1,4 @@
+Enter event name: 
+Enter event name: 
+Enter num tickets: 
+Error: Input is invalid
