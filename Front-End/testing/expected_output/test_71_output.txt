@@ -1,2 +1,2 @@
 Enter event name:
-Error: Num tickets is invalid
+Error: Event name entered is invalid

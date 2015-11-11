@@ -1,7 +1,6 @@
 #!/bin/bash
 
-rm -f outputs/*
-rmdir outputs
+rm -f -R outputs
 mkdir outputs
 
 COUNTER=1
@@ -32,4 +31,3 @@ while [  $COUNTER -lt 81 ]; do  # validate 80 tests
 
     let COUNTER=COUNTER+1
 done
-

@@ -65,9 +65,11 @@ while programloop:
             # process sell command
             elif command == "sell":
                 if user.validCommand(Transaction.SELL):
-                    eventName = raw_input("Enter event name: \n")
-                    if eventName.strip() in currentEvents.events: # Event name valid
-                        raw = raw_input("Enter num tickets: \n")
+                    eventName = raw_input("Enter event name: \n").strip()
+                    if eventName in currentEvents.events: # Event name valid
+                        raw = raw_input("Enter num tickets: \n").strip()
+                        if not raw:
+                            raise QuibbleError("Error: Num tickets is invalid") # Invalid ticket number
                         numTickets = int(raw)  # Enter number of tickets
                         if (numTickets>=1) and ( (not user.admin and numTickets <= 8) or (user.admin and numTickets <= currentEvents.getEvent(eventName).numTickets) ):  # Numtickets valid
                             dailyTransactions.addTransaction(Transaction(eventName, Transaction.SELL, numTickets)) # Sell ticket
@@ -109,7 +111,7 @@ while programloop:
                             if numTickets <= 99999 and numTickets > 0:
                                 dailyTransactions.addTransaction(Transaction(eventName, Transaction.CREATE,numTickets,date))  # create ticket
                             else:
-                                raise QuibbleError("Error: Number is invalid")
+                                raise QuibbleError("Error: Num tickets is invalid")
                         else:
                             raise QuibbleError("Error: Input is invalid")
                     else:
@@ -126,7 +128,7 @@ while programloop:
                         if numTickets>=1 and numTickets <= 99999:
                             dailyTransactions.addTransaction(Transaction(eventName, Transaction.ADD,numTickets))  # Add ticket
                         else:
-                            raise QuibbleError("Error: Number is invalid")  # Invalid number of tickets
+                            raise QuibbleError("Error: Num tickets is invalid")  # Invalid number of tickets
                     else:
                         raise QuibbleError("Error: Event name entered is invalid")  # Invalid event name
                 else:
