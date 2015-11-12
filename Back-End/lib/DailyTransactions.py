@@ -12,6 +12,6 @@ class DailyTransactions:
     def fromFile(self, filename):
         with open(filename) as input_file:
             for i, line in enumerate(input_file):
-                if line.strip() != "END":
+                if line.strip()[:2] != "00":
                     transaction = Transaction.newInstanceFromLine(line.strip())
                     self.addTransaction(transaction)

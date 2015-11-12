@@ -18,12 +18,12 @@ class Transaction:
 
     def newInstanceFromLine(transactionLine):
         ttype = int(transactionLine[:2])
-        name = transactionLine[3:23]
+        name = transactionLine[3:23].strip()
         date = transactionLine[24:30]
         numtickets = transactionLine[31:]
 
         if date and numtickets:
             return Transaction(name, ttype, int(numtickets), date)
 
-    the_static_method = staticmethod(newInstanceFromLine)
+    newInstanceFromLine = staticmethod(newInstanceFromLine)
 

@@ -3,6 +3,6 @@
 class Event:
 
     def __init__(self, eventName, numTickets, date):
-        self.eventName = eventName
-        self.numTickets = numTickets
+        self.eventName = eventName.strip()
+        self.numTickets = int(numTickets)
         self.date = date

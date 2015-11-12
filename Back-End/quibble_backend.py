@@ -11,13 +11,15 @@ from lib.Transaction import *
 previousMasterEventsFile = "test_old_master_file.txt"
 newMasterEventsFile = "test_new_master_file.txt"
 newCurrentEventsFile = "test_new_currentEvents_file.txt"
-transactionFiles = ["transaction1.txt", "transaction2.txt"]
+transactionFiles = ["transactions1.txt", "transactions2.txt"]
 
-masterEvents = MasterEventsFile().fromFile(previousMasterEventsFile)
+masterEvents = MasterEventsFile()
+masterEvents.fromFile(previousMasterEventsFile)
 
 # process each file and transaction
 for file in transactionFiles:
-    transactionFile = DailyTransactions().fromFile(file)
+    transactionFile = DailyTransactions()
+    transactionFile.fromFile(file)
 
     for t in transactionFile.transactions:
         masterEvents.processTransaction(t)
