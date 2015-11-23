@@ -25,7 +25,6 @@ class Transaction:
         self.transactionType = transactionType
         self.numTickets = numTickets
 
-
     # The newInstanceFromLine function parses through each transaction line taking in as type (string)
     # and returns the information into a type transaction instance.
     def newInstanceFromLine(transactionLine):

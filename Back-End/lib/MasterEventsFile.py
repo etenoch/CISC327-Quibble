@@ -9,6 +9,7 @@
 
 from Event import *
 from Transaction import *
+import datetime
 
 class MasterEventsFile:
 
@@ -18,7 +19,6 @@ class MasterEventsFile:
     # The addEvent function takes in an instance of type event and adds it the the master list.
     def addEvent(self,event):
         self.events[event.eventName] = event
-
 
     # The processTransaction file takes in an instance of type transaction. It than procceeds
     # accordingly depending on its indicated type.
@@ -35,7 +35,6 @@ class MasterEventsFile:
         elif transaction.transactionType == Transaction.SELL:
             self.events[transaction.eventName].numTickets -= int(transaction.numTickets)
 
-
     # The createCurrentEventsFile funaction takes in a output filename (string) and creates a new current events
     # file containing the details of an event with an ending statement.
     def createCurrentEventsFile(self,filename):
@@ -45,18 +44,18 @@ class MasterEventsFile:
             file.write(line)
         file.write("END                  00000")
 
-
     # The toFile function takes in a output filename (string) and writes to a new file master
     # events files adding all the event information.
-    def toFile(self,filename):
+    def toFile(self, filename):
         # sort
+        sortedList = sorted(self.events.values(), key=lambda ev: self.dateToUnixTime(ev.date))
+
         file = open(filename, "w")
         for t in self.events:
             date = 0 if self.events[t].date == "" or self.events[t].date == 0 else int(self.events[t].date)
             line = "%06d %05d %s\n" % (date, self.events[t].numTickets, self.events[t].eventName.ljust(20))
             file.write(line)
             # file.write("00                      000000 00000")
-
 
     # The fromFile function reads event input data from a input file and creates a new event
     # instance from the information obtained.
@@ -69,3 +68,9 @@ class MasterEventsFile:
                     name = line[13:].strip()
                     event = Event(name, numTickets, date)
                     self.addEvent(event)
+
+    # helper function to convert quibble date format to unix time for easy comparision
+    def dateToUnixTime(self,date):
+        print str(date)
+        return datetime.datetime.strptime(str(date), "%y%m%d").strftime("%s")
+
