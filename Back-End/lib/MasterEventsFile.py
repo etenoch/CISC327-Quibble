@@ -1,3 +1,11 @@
+# CISC327 Quibble - Back End
+#   Team Apus
+#   Adam Perron (10106523)
+#   Enoch Tam (10094398)
+
+# The MasterEventsFile deals with adding a new instances of an event, processing
+# each transaction as determined by its type, creating the output files, and writing
+# output to a file.
 
 from Event import *
 from Transaction import *
@@ -7,9 +15,13 @@ class MasterEventsFile:
     def __init__(self):
         self.events = {}
 
+    # The addEvent function takes in an instance of type event and adds it the the master list.
     def addEvent(self,event):
         self.events[event.eventName] = event
 
+
+    # The processTransaction file takes in an instance of type transaction. It than procceeds
+    # accordingly depending on its indicated type.
     def processTransaction(self,transaction):
         if transaction.transactionType == Transaction.ADD:
             self.events[transaction.eventName].numTickets += int(transaction.numTickets)
@@ -23,6 +35,9 @@ class MasterEventsFile:
         elif transaction.transactionType == Transaction.SELL:
             self.events[transaction.eventName].numTickets -= int(transaction.numTickets)
 
+
+    # The createCurrentEventsFile funaction takes in a output filename (string) and creates a new current events
+    # file containing the details of an event with an ending statement.
     def createCurrentEventsFile(self,filename):
         file = open(filename,"w")
         for e in self.events:
@@ -30,6 +45,9 @@ class MasterEventsFile:
             file.write(line)
         file.write("END                  00000")
 
+
+    # The toFile function takes in a output filename (string) and writes to a new file master
+    # events files adding all the event information.
     def toFile(self,filename):
         # sort
         file = open(filename, "w")
@@ -37,8 +55,11 @@ class MasterEventsFile:
             date = 0 if self.events[t].date == "" or self.events[t].date == 0 else int(self.events[t].date)
             line = "%06d %05d %s\n" % (date, self.events[t].numTickets, self.events[t].eventName.ljust(20))
             file.write(line)
-        # file.write("00                      000000 00000")
+            # file.write("00                      000000 00000")
 
+
+    # The fromFile function reads event input data from a input file and creates a new event
+    # instance from the information obtained.
     def fromFile(self, filename):
         with open(filename) as input_file:
             for i, line in enumerate(input_file):
@@ -48,4 +69,3 @@ class MasterEventsFile:
                     name = line[13:].strip()
                     event = Event(name, numTickets, date)
                     self.addEvent(event)
-

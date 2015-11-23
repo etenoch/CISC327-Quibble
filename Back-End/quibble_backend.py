@@ -3,6 +3,9 @@
 #   Adam Perron (10106523)
 #   Enoch Tam (10094398)
 
+# The quibble_backend is responsible for keeping track of the current files in use.
+# It imports it data from the MasterEventsFile, DailyTransactions and Transaction classes.
+
 from lib.MasterEventsFile import *
 from lib.DailyTransactions import *
 from lib.Transaction import *
