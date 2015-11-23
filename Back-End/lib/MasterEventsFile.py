@@ -51,9 +51,9 @@ class MasterEventsFile:
         sortedList = sorted(self.events.values(), key=lambda ev: self.dateToUnixTime(ev.date))
 
         file = open(filename, "w")
-        for t in self.events:
-            date = 0 if self.events[t].date == "" or self.events[t].date == 0 else int(self.events[t].date)
-            line = "%06d %05d %s\n" % (date, self.events[t].numTickets, self.events[t].eventName.ljust(20))
+        for ev in sortedList:
+            date = 0 if ev.date == "" or ev.date == 0 else int(ev.date)
+            line = "%06d %05d %s\n" % (date, ev.numTickets, ev.eventName.ljust(20))
             file.write(line)
             # file.write("00                      000000 00000")
 
@@ -71,6 +71,5 @@ class MasterEventsFile:
 
     # helper function to convert quibble date format to unix time for easy comparision
     def dateToUnixTime(self,date):
-        print str(date)
         return datetime.datetime.strptime(str(date), "%y%m%d").strftime("%s")
 
