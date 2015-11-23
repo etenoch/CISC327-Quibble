@@ -6,7 +6,7 @@
 # The Transaction file is in charge of dealing with the transactions in the system. It creates
 # instances of type transaction that holds relevant information on each transaction in the
 # system.
-
+from testing import *
 class Transaction:
 
     SELL = 1

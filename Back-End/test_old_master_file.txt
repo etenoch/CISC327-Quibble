@@ -1,2 +1,0 @@
-151209 00040           Test Event
-151220 00100     Some other Event

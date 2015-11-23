@@ -7,12 +7,12 @@
 # all the transactions to a master list, as well as it reads in a text file and parses
 # though the data.
 
-from Transaction import *
+from Transaction import *;from testing import *
 
 class DailyTransactions:
 
     def __init__(self):
-        self.transactions = []
+        logBranch(5,"DailyTransactions",15); self.transactions = []
 
     # The addTransaction function takes in an instance of a transaction and appends it to a master
     # list.
@@ -22,6 +22,7 @@ class DailyTransactions:
     # The fromFile function reads in data from a textfile (filename) and parses it by striping the blank
     # characters row by row into a workable format (transaction class).
     def fromFile(self, filename):
+        logBranch(6,"DailyTransactions",25);
         with open(filename) as input_file:
             for i, line in enumerate(input_file):
                 if line.strip()[:2] != "00":

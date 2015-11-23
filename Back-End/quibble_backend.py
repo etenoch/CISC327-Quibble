@@ -8,26 +8,26 @@
 
 from lib.MasterEventsFile import *
 from lib.DailyTransactions import *
-from lib.Transaction import *
+from lib.Transaction import *; from testing import *; clearTestLog()
 
 # init
-previousMasterEventsFile = "test_old_master_file.txt"
-newMasterEventsFile = "test_new_master_file.txt"
-newCurrentEventsFile = "test_new_currentEvents_file.txt"
-transactionFiles = ["transactions1.txt", "transactions2.txt"]
+logBranch(1,"quibble_backend",14); previousMasterEventsFile = "test_create_old_master_file.txt"
+newMasterEventsFile = "test_create_new_master_file.txt"
+newCurrentEventsFile = "test_create_currenteventsfile.txt"
+transactionFiles = ["test_create_dailytransactions.txt"]
 
 masterEvents = MasterEventsFile()
 masterEvents.fromFile(previousMasterEventsFile)
 
 # process each file and transaction
 for file in transactionFiles:
-    transactionFile = DailyTransactions()
+    logBranch(4,"quibble_backend",24); transactionFile = DailyTransactions()
     transactionFile.fromFile(file)
 
     for t in transactionFile.transactions:
-        masterEvents.processTransaction(t)
+        logBranch(7,"quibble_backend",28); masterEvents.processTransaction(t)
 
 
 # write out result files
-masterEvents.createCurrentEventsFile(newCurrentEventsFile)
+logBranch(12,"quibble_backend",32); masterEvents.createCurrentEventsFile(newCurrentEventsFile)
 masterEvents.toFile(newMasterEventsFile)

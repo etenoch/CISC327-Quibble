@@ -9,20 +9,21 @@
 
 from Event import *
 from Transaction import *
-import datetime
+import datetime;from testing import *
 
 class MasterEventsFile:
 
     def __init__(self):
-        self.events = {}
+        logBranch(2,"MasterEventsFile",17); self.events = {}
 
     # The addEvent function takes in an instance of type event and adds it the the master list.
     def addEvent(self,event):
-        self.events[event.eventName] = event
+        logBranch(11,"MasterEventsFile",20); self.events[event.eventName] = event
 
     # The processTransaction file takes in an instance of type transaction. It than procceeds
     # accordingly depending on its indicated type.
     def processTransaction(self,transaction):
+        logBranch(8,"MasterEventsFile",26)
         if transaction.transactionType == Transaction.ADD:
             self.events[transaction.eventName].numTickets += int(transaction.numTickets)
         elif transaction.transactionType == Transaction.DELETE:
@@ -30,7 +31,7 @@ class MasterEventsFile:
         elif transaction.transactionType == Transaction.RETURN:
             self.events[transaction.eventName].numTickets += int(transaction.numTickets)
         elif transaction.transactionType == Transaction.CREATE:
-            event = Event(transaction.eventName, transaction.numTickets, transaction.date)
+            logBranch(9,"MasterEventsFile",34); event = Event(transaction.eventName, transaction.numTickets, transaction.date)
             self.addEvent(event)
         elif transaction.transactionType == Transaction.SELL:
             self.events[transaction.eventName].numTickets -= int(transaction.numTickets)
@@ -38,7 +39,7 @@ class MasterEventsFile:
     # The createCurrentEventsFile funaction takes in a output filename (string) and creates a new current events
     # file containing the details of an event with an ending statement.
     def createCurrentEventsFile(self,filename):
-        file = open(filename,"w")
+        logBranch(13,"MasterEventsFile",42); file = open(filename,"w")
         for e in self.events:
             line = "%s %05d\n" % (self.events[e].eventName.ljust(20), self.events[e].numTickets)
             file.write(line)
@@ -47,8 +48,8 @@ class MasterEventsFile:
     # The toFile function takes in a output filename (string) and writes to a new file master
     # events files adding all the event information.
     def toFile(self, filename):
-        # sort
-        sortedList = sorted(self.events.values(), key=lambda ev: self.dateToUnixTime(ev.date))
+        logBranch(14,"MasterEventsFile",51);
+        sortedList = sorted(self.events.values(), key=lambda ev: self.dateToUnixTime(ev.date))# sort
 
         file = open(filename, "w")
         for ev in sortedList:
@@ -60,6 +61,7 @@ class MasterEventsFile:
     # The fromFile function reads event input data from a input file and creates a new event
     # instance from the information obtained.
     def fromFile(self, filename):
+        logBranch(3,"MasterEventsFile",64)
         with open(filename) as input_file:
             for i, line in enumerate(input_file):
                 if line.strip() != "END":
