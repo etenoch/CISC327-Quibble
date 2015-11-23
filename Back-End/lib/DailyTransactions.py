@@ -19,7 +19,6 @@ class DailyTransactions:
     def addTransaction(self, transaction):
         self.transactions.append(transaction)
 
-
     # The fromFile function reads in data from a textfile (filename) and parses it by striping the blank
     # characters row by row into a workable format (transaction class).
     def fromFile(self, filename):
