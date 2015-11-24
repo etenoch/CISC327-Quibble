@@ -23,25 +23,29 @@ class MasterEventsFile:
     # The processTransaction file takes in an instance of type transaction. It than procceeds
     # accordingly depending on its indicated type.
     def processTransaction(self,transaction):
-        if transaction.transactionType == Transaction.ADD:
-            self.events[transaction.eventName].numTickets += int(transaction.numTickets)
-        elif transaction.transactionType == Transaction.DELETE:
-            del self.events[transaction.eventName]
-        elif transaction.transactionType == Transaction.RETURN:
-            self.events[transaction.eventName].numTickets += int(transaction.numTickets)
-        elif transaction.transactionType == Transaction.CREATE:
-            event = Event(transaction.eventName, transaction.numTickets, transaction.date)
-            self.addEvent(event)
-        elif transaction.transactionType == Transaction.SELL:
-            self.events[transaction.eventName].numTickets -= int(transaction.numTickets)
+        if transaction.eventName and transaction.eventName in self.events:
+            if transaction.transactionType == Transaction.ADD:
+                self.events[transaction.eventName].numTickets += int(transaction.numTickets)
+            elif transaction.transactionType == Transaction.DELETE:
+                del self.events[transaction.eventName]
+            elif transaction.transactionType == Transaction.RETURN:
+                self.events[transaction.eventName].numTickets += int(transaction.numTickets)
+            elif transaction.transactionType == Transaction.CREATE:
+                event = Event(transaction.eventName, transaction.numTickets, transaction.date)
+                self.addEvent(event)
+            elif transaction.transactionType == Transaction.SELL:
+                self.events[transaction.eventName].numTickets -= int(transaction.numTickets)
+                if self.events[transaction.eventName].numTickets < 0:
+                    self.events[transaction.eventName].numTickets = 0
 
     # The createCurrentEventsFile funaction takes in a output filename (string) and creates a new current events
     # file containing the details of an event with an ending statement.
     def createCurrentEventsFile(self,filename):
         file = open(filename,"w")
         for e in self.events:
-            line = "%s %05d\n" % (self.events[e].eventName.ljust(20), self.events[e].numTickets)
-            file.write(line)
+            if self.events[e].numTickets > 0:
+                line = "%s %05d\n" % (self.events[e].eventName.ljust(20), self.events[e].numTickets)
+                file.write(line)
         file.write("END                  00000")
 
     # The toFile function takes in a output filename (string) and writes to a new file master
@@ -52,10 +56,11 @@ class MasterEventsFile:
 
         file = open(filename, "w")
         for ev in sortedList:
-            date = 0 if ev.date == "" or ev.date == 0 else int(ev.date)
-            line = "%06d %05d %s\n" % (date, ev.numTickets, ev.eventName.ljust(20))
-            file.write(line)
-            # file.write("00                      000000 00000")
+            if ev.numTickets > 0:
+                date = 0 if ev.date == "" or ev.date == 0 else int(ev.date)
+                line = "%06d %05d %s\n" % (date, ev.numTickets, ev.eventName.ljust(20))
+                file.write(line)
+                # file.write("00                      000000 00000")
 
     # The fromFile function reads event input data from a input file and creates a new event
     # instance from the information obtained.
