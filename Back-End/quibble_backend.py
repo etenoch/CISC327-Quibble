@@ -8,13 +8,16 @@
 
 from lib.MasterEventsFile import *
 from lib.DailyTransactions import *
-from lib.Transaction import *
+
+import sys
+
+cmd_arguments = sys.argv
 
 # init
-previousMasterEventsFile = "test_old_master_file.txt"
-newMasterEventsFile = "test_new_master_file.txt"
-newCurrentEventsFile = "test_new_currentEvents_file.txt"
-transactionFiles = ["transactions1.txt", "transactions2.txt"]
+previousMasterEventsFile = cmd_arguments[1]
+newMasterEventsFile = cmd_arguments[3]
+newCurrentEventsFile = cmd_arguments[4]
+transactionFiles = [cmd_arguments[2]]
 
 masterEvents = MasterEventsFile()
 masterEvents.fromFile(previousMasterEventsFile)
