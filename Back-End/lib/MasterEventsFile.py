@@ -23,20 +23,21 @@ class MasterEventsFile:
     # The processTransaction file takes in an instance of type transaction. It than procceeds
     # accordingly depending on its indicated type.
     def processTransaction(self,transaction):
-        if transaction.eventName and transaction.eventName in self.events:
-            if transaction.transactionType == Transaction.ADD:
-                self.events[transaction.eventName].numTickets += int(transaction.numTickets)
-            elif transaction.transactionType == Transaction.DELETE:
-                del self.events[transaction.eventName]
-            elif transaction.transactionType == Transaction.RETURN:
-                self.events[transaction.eventName].numTickets += int(transaction.numTickets)
-            elif transaction.transactionType == Transaction.CREATE:
+        if transaction.eventName:
+            if transaction.transactionType == Transaction.CREATE:
                 event = Event(transaction.eventName, transaction.numTickets, transaction.date)
                 self.addEvent(event)
-            elif transaction.transactionType == Transaction.SELL:
-                self.events[transaction.eventName].numTickets -= int(transaction.numTickets)
-                if self.events[transaction.eventName].numTickets < 0:
-                    self.events[transaction.eventName].numTickets = 0
+            if transaction.eventName in self.events:
+                if transaction.transactionType == Transaction.ADD:
+                    self.events[transaction.eventName].numTickets += int(transaction.numTickets)
+                elif transaction.transactionType == Transaction.DELETE:
+                    del self.events[transaction.eventName]
+                elif transaction.transactionType == Transaction.RETURN:
+                    self.events[transaction.eventName].numTickets += int(transaction.numTickets)
+                elif transaction.transactionType == Transaction.SELL:
+                    self.events[transaction.eventName].numTickets -= int(transaction.numTickets)
+                    if self.events[transaction.eventName].numTickets < 0:
+                        self.events[transaction.eventName].numTickets = 0
 
     # The createCurrentEventsFile funaction takes in a output filename (string) and creates a new current events
     # file containing the details of an event with an ending statement.
