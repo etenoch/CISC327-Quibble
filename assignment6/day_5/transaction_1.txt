@@ -1,0 +1,6 @@
+login
+admin
+sell
+New Event
+10
+logout
