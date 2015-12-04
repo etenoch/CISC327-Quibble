@@ -1,0 +1,7 @@
+login
+admin
+create
+New Event
+160120
+50
+logout
