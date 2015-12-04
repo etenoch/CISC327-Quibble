@@ -3,17 +3,23 @@
 #   Adam Perron (10106523)
 #   Enoch Tam (10094398)
 
+# The daily testing script assumes Day 1 as a default entry.
+# The script reads in reads the current Event File (txt) and the current Master Event File (txt).
+# A temporary file is then made which holds the the processed transcations as the program cycles through the Event Files.
+# Once complete the content of the temporary file is ran, which will result into a newly generated Master File for the current day.
 
 import sys
 import os
 import os.path
 
+# python scripts used for the front and backend
 front_end_code = "code_front_final/quibble.py"
 back_end_code = "code_back_final/quibble_backend.py"
 
-# defualt
+# assume day_1 as already exsisting (default)
 base_path = "day_1/"
 
+# locations of files are retrived according to the base path
 old_master_events_file = base_path+"inputs/master_events_file.txt"
 old_current_events_file = base_path+"inputs/current_events_file.txt"
 
@@ -42,8 +48,9 @@ if len(sys.argv)>1: # called from weekly script
 	new_master_events_file = outputs+"/master_events_file.txt"
 	new_current_events_file = outputs+"/current_events_file.txt"
 
-
+# allow for file to be written to
 open(merged_transactions_file,"w").close()
+
 # run frontend cases
 for case in transactions:
 
@@ -61,5 +68,4 @@ for case in transactions:
 
 # run backend
 os.system("python "+back_end_code+" "+old_master_events_file+" "+merged_transactions_file+" "+new_master_events_file+" "+new_current_events_file)
-
 

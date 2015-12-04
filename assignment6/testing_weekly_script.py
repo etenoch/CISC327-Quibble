@@ -3,9 +3,16 @@
 #   Adam Perron (10106523)
 #   Enoch Tam (10094398)
 
+# The testing weekly script uses testing_daily_script.py script to run all the computations.
+# The only modifcation is that all the files (txt) for the week with be passed into the script as array.
+# The daily script will compute the results (output) for the week rather than just for the one day.
+
 import os
 
 daily_testing_script = "testing_daily_script.py"
+
+
+# Information for the week
 
 days = [
 		{
